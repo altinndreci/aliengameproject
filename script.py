@@ -1,8 +1,7 @@
-from aliengame import Human 
+from aliengame import Person 
 from aliengame import Story
 
 
-player = Human()
+player = Person()
 story = Story(player)  # Pass the player object
 print(story.intro)
-
