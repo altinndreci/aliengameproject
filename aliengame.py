@@ -21,7 +21,7 @@ class Person:
     
     
     def total_blood_usage(self):
-        return sum(self.items.values())
+        return sum(self.inventory.items.values())
 
 
 
@@ -52,6 +52,9 @@ class Inventory:
     def add_item(self, name, blood_price):
         if blood_price < 0:
             raise ValueError("Blood secretion cannot be negative, person is already dead!")
+        if not self.person.use_blood(blood_price):
+            print(f"Cannot add {name} due to low blood.")
+            return
         self.items[name] = blood_price
         print(f"{name} added to your inventory for the cost of {blood_price} units of blood!")
     

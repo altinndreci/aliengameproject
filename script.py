@@ -1,6 +1,4 @@
-from aliengame import Person 
-from aliengame import Story
-from aliengame import Inventory
+from aliengame import Person, Story
 
 
 player = Person()
