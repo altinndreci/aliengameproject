@@ -1,24 +1,23 @@
 import unittest
-from aliengame import Person, Inventory, Story
+from aliengame import User, Inventory, Story, Item, GameManager
 
 class TestInventory(unittest.TestCase):
+    def setUp(self):
+        self.user = User.__new__(User)
+        self.user.name = "Joe Schmoe"
+        self.user.blood = 100
+        self.user.inventory = Inventory(self.user)
+        self.inventory = self.user.inventory
+        self.inventory.add_item("Alien Gun", 30)
 
     def tearDown(self):
         print("\n" + "-" * 50 + "\n")
-        
-    def setUp(self):
-        self.person = Person.__new__(Person)
-        self.person.name = "Joe Schmoe"
-        self.person.blood = 100
-        self.person.inventory = Inventory(self.person)
-        self.inventory = self.person.inventory
-        self.inventory.add_item("Alien Gun", 30)
 
     def test_add_item(self):
-        initial_blood = self.person.blood
+        initial_blood = self.user.blood
         self.inventory.add_item("Alien Knife", 20)
         self.assertIn("Alien Knife", self.inventory.items)
-        self.assertEqual(self.person.blood, initial_blood - 20)
+        self.assertEqual(self.user.blood, initial_blood - 20)
 
     def test_remove_item(self):
         self.inventory.add_item("Alien Snot", 10)
@@ -26,16 +25,16 @@ class TestInventory(unittest.TestCase):
         self.assertNotIn("Alien Snot", self.inventory.items)
 
     def test_total_blood_price(self):
-        self.person.inventory.items = {}
+        self.user.inventory.items = {}
         self.inventory.add_item("Alien Knife", 40)
         self.inventory.add_item("Alien Gun", 30)
         self.assertEqual(self.inventory.total_blood_price(), 70)
 
     def test_insufficient_blood(self):
-        self.person.blood = 50
+        self.user.blood = 50
         self.inventory.add_item("Alien Bomb", 80)
         self.assertNotIn("Alien Bomb", self.inventory.items)
-        result = self.person.use_blood(80)
+        result = self.user.use_blood(80)
         self.assertFalse(result)
 
 unittest.main(argv=[''], exit=False)
