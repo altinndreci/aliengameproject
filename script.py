@@ -5,13 +5,19 @@ story = Story(player)
 print(story.intro)
 
 stealable_items = [
-            ("Alien Gun", 50),
-            ("Alien Knife", 30),
-            ("Alien Snot", 10),
-            ("Alien Bomb", 60),
-            ("Alien Shield", 40),
-            ("Alien Potion", 20),
+    ("Alien Gun", 50),
+    ("Alien Knife", 30),
+    ("Alien Snot", 10),
+    ("Alien Bomb", 60),
+    ("Alien Shield", 40),
+    ("Alien Potion", 20),
 ]
+def below_blood_level():
+    if player.blood <= 0:
+        print("You didn't manage your blood.\n GAME OVER.")
+        return True
+    return False
+
 while True:
     print("Main Menu")
     print("1. Show Stealing Inventory")
@@ -21,29 +27,43 @@ while True:
     print("5. Exit")
   
     choice = input("Choose an option: ")
+    
     if choice == '1':
         print("Stealing Inventory:")
         print(player.inventory.items)
+    
     elif choice == '2':
-
-
-
         print("Choose an item to steal: ")
-        for item in range(len(stealable_items)):
-            print(f"{item + 1}. {stealable_items[item][0]} (Blood Cost: {stealable_items[item][1]}]")
+        for i in range(len(stealable_items)):
+            item = stealable_items[i]
+            print(f"{i + 1}. {item[0]} (Blood Cost: {item[1]})")
 
         selected_item = input("Enter item number: ")
-        numbered_item = int(selected_item)-1
-        if 0 <= numbered_item < len(stealable_items):
-            item = stealable_items[numbered_item]
-            player.inventory.add_item(item[0], item[1])
-            print(f"You stole: {item[0]} (Blood Cost: {item[1]})")
-        else: 
-            print("Invalid choice. Choose a number from the list.")
+        try:
+            numbered_item = int(selected_item) - 1
+            if 0 <= numbered_item < len(stealable_items):
+                item = stealable_items[numbered_item]
+                
+                if player.inventory.add_item(item[0], item[1]):
+                    print(f"You stole: {item[0]} (Blood Cost: {item[1]})")
+                
+                    if below_blood_level():
+                        break  
+                else:
+                    print("Can't steal item due to blood level.")
+                    if below_blood_level():
+                        break  
+            else: 
+                print("Invalid choice. Choose a number from the list.")
+        except ValueError:
+            print("Please enter a correct input.")
+    
     elif choice == '3':
         print("Items you can steal: ")
-        for item in range(len(stealable_items)):
-            print(f"{item + 1}. {stealable_items[item][0]} (Blood Cost: {stealable_items[item][1]}]")
+        for i in range(len(stealable_items)):
+            item = stealable_items[i]
+            print(f"{i + 1}. {item[0]} (Blood Cost: {item[1]})")
+   
     elif choice == '4':
         player_items = list(player.inventory.items.keys())
 
@@ -52,23 +72,27 @@ while True:
         else:
             print("Choose an item to return: ")
         
-        for item in range(len(player_items)):
-            print(f"{item + 1}. {player_items[item]} (Blood Cost: {player_items[item]}]")
-        Returning_item = input("Enter item number: ")
-        numbered_item = int(Returning_item)-1
-
-        if 0 <= numbered_item < len(player_items):
-            item_name = player_items[numbered_item]
+        for i in range(len(player_items)):
+            item_name = player_items[i]
             item_blood_cost = player.inventory.items[item_name]
+            print(f"{i + 1}. {item_name} (Blood Cost: {item_blood_cost})")
+        
+        Returning_item = input("Enter Item number: ")
+        try:
+            numbered_item = int(Returning_item) - 1
+            if 0 <= numbered_item < len(player_items):
+                item_name = player_items[numbered_item]
+                item_blood_cost = player.inventory.items[item_name]
 
-            player.inventory.remove_item(item_name)
+                player.inventory.remove_item(item_name)
 
-            if (item_name, item_blood_cost) not in stealable_items:
                 stealable_items.append((item_name, item_blood_cost))
 
-            print(f"You successfully returned: {item_name}")
-        else:
-            print("Invalid Choice, Choose a number from the list.")
+                print(f"You successfully returned: {item_name}")
+            else:
+                print("Invalid Choice, Choose a number from the list.")
+        except ValueError:
+            print("Please enter a correct input.")
 
     elif choice == '5':
         print("Exiting the game. Goodbye!")
