@@ -1,9 +1,8 @@
-from aliengame import User, Story, GameManager, Item
-
-
-def tearDown(self):
-        print("\n" + "-" * 50 + "\n")
-
+from ClassUser import User
+from ClassStory import Story
+from ClassInventory import Inventory
+from ClassItem import Item
+from ClassGameManager import GameManager
         
 player = User()
 story = Story(player)
@@ -35,7 +34,7 @@ while True:
     
     if choice == '1':
         print("Stealing Inventory:")
-        print(player.inventory.items)
+        print(player.Inventory.items)
     
     elif choice == '2':
         print("Choose an item to steal: ")
@@ -49,7 +48,7 @@ while True:
             if 0 <= numbered_item < len(stealable_items):
                 item = stealable_items[numbered_item]
                 
-                if player.inventory.add_item(item[0], item[1]):
+                if player.Inventory.add_item(item[0], item[1]):
                     print(f"You stole: {item[0]} (Blood Cost: {item[1]})")
                 
                     if below_blood_level():
@@ -70,7 +69,7 @@ while True:
             print(f"{i + 1}. {item[0]} (Blood Cost: {item[1]})")
    
     elif choice == '4':
-        player_items = list(player.inventory.items.keys())
+        player_items = list(player.Inventory.items.keys())
 
         if not player_items:
             print("You have no items to return.")
@@ -79,7 +78,7 @@ while True:
         
         for i in range(len(player_items)):
             item_name = player_items[i]
-            item_blood_cost = player.inventory.items[item_name]
+            item_blood_cost = player.Inventory.items[item_name]
             print(f"{i + 1}. {item_name} (Blood Cost: {item_blood_cost})")
         
         Returning_item = input("Enter Item number: ")
@@ -87,9 +86,9 @@ while True:
             numbered_item = int(Returning_item) - 1
             if 0 <= numbered_item < len(player_items):
                 item_name = player_items[numbered_item]
-                item_blood_cost = player.inventory.items[item_name]
+                item_blood_cost = player.Inventory.items[item_name]
 
-                player.inventory.remove_item(item_name)
+                player.Inventory.remove_item(item_name)
 
                 stealable_items.append((item_name, item_blood_cost))
 

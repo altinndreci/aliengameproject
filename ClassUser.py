@@ -1,3 +1,5 @@
+from ClassInventory import Inventory
+
 import time
 #Time will be used later as a consequence tool.
 class User:
@@ -8,7 +10,7 @@ class User:
         print("You're finally awake!")
         print("Hello Prisoner,", self.name)
         self.blood = 100
-        self.inventory = Inventory(self)
+        self.Inventory = Inventory(self)
         self.consequence = 0
 
     def get_name(self):
@@ -25,7 +27,7 @@ class User:
         return True
 
     def total_blood_usage(self):
-        return sum(self.inventory.items.values())
+        return sum(self.Inventory.items.values())
     
     def rest(self):
         #This is a function that lets the user rest to recover blood
@@ -33,11 +35,3 @@ class User:
         self.blood += 10
         print(f"Blood remaining: {self.blood}/100")
         return self.blood
-    
-
-
-
-
-
-
-
