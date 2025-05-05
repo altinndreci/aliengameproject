@@ -1,8 +1,10 @@
+import sqlite3
 from ClassUser import User
 from ClassStory import Story
 from ClassInventory import Inventory
 from ClassItem import Item
 from ClassGameManager import GameManager
+from alien_database import MakeDatabase
         
 player = User()
 story = Story(player)

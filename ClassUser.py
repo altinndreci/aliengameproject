@@ -1,3 +1,4 @@
+import sqlite3
 from ClassInventory import Inventory
 
 import time
