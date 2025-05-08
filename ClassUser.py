@@ -24,6 +24,7 @@ class User:
             print("Not enough blood to make this purchase!")
             return False
         self.blood -= amount
+        print('\n')
         print(f"Blood remaining: {self.blood}/100")
         return True
 

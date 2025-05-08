@@ -32,8 +32,8 @@ class TestInventory(unittest.TestCase):
 
     def test_insufficient_blood(self):
         self.user.blood = 50
-        self.inventory.add_item("Alien Bomb", 80)
-        self.assertNotIn("Alien Bomb", self.inventory.items)
+        self.inventory.add_item("Alien Bomb Launcher", 80)
+        self.assertNotIn("Alien Bomb Launcher", self.inventory.items)
         result = self.user.use_blood(80)
         self.assertFalse(result)
 

@@ -7,16 +7,18 @@ from ClassGameManager import GameManager
 from alien_database import MakeDatabase
         
 player = User()
+MakeDatabase(player)
 story = Story(player)
 print(story.intro)
+
 
 stealable_items = [
     ("Alien Gun", 50),
     ("Alien Knife", 30),
     ("Alien Snot", 10),
-    ("Alien Bomb", 60),
+    ("Alien Bomb Launcher", 60),
     ("Alien Shield", 40),
-    ("Alien Potion", 20),
+    ("Alien Potion", 20)
 ]
 def below_blood_level():
     if player.blood <= 0:
@@ -30,7 +32,7 @@ while True:
     print("2. Steal Item")
     print("3. Show Stealable Items")
     print("4. Return an Item")
-    print("5. Exit")
+    print("5. Exit\n")
   
     choice = input("Choose an option: ")
     
@@ -52,6 +54,7 @@ while True:
                 
                 if player.Inventory.add_item(item[0], item[1]):
                     print(f"You stole: {item[0]} (Blood Cost: {item[1]})")
+                    print('\n')
                 
                     if below_blood_level():
                         break  
