@@ -37,7 +37,11 @@ while True:
     print("3. Show Stealable Items")
     print("4. Return an Item")
     print("5. Exit")
-    print("6. View Transaction History \n")
+    print("6. View Transaction History")
+    print("7. Show Map")
+    print("8. Travel\n")
+
+
 
   
     choice = input("Choose an option: ")
@@ -171,6 +175,14 @@ while True:
         print("\n")
 
         conn.close()
+
+    elif choice == '7':
+        story.draw_map()
+        story.show_map()
+
+    elif choice == '8':
+        dest = input("Enter the location you want to travel to: ")
+        story.travel(dest)
 
     else:
         print("Wrong move buddy. Try again.")

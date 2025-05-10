@@ -35,7 +35,7 @@ class MakeDatabase():
     ("Alien Gun", 50, 1),
     ("Alien Knife", 30, 1),
     ("Alien Snot", 10, 1),
-    ("Alien Bomb Launcher", 60, 1),
+    ("Bomb Launcher", 60, 1),
     ("Alien Shield", 40, 1),
     ("Alien Potion", 20, 1)]
 
