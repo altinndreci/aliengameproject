@@ -1,6 +1,7 @@
 import sqlite3
 from ClassUser import User
 
+#Creating the class for the database
 class MakeDatabase():
     def __init__(self, player):
         username = player.get_name()
@@ -39,22 +40,19 @@ class MakeDatabase():
     ("Alien Potion", 20, 1)]
 
         cursor.executemany("INSERT OR IGNORE INTO items (name, blood_price, quantity) VALUES (?, ?, ?)", items)
+        
         #creates table in database for transactions
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
             username TEXT,
             item_name TEXT,
-            steal_time REAL,
-            PRIMARY KEY (username, item_name),
+            action TEXT,
+            action_time REAL,
             FOREIGN KEY (username) REFERENCES users(username),
             FOREIGN KEY (item_name) REFERENCES items(name)
         );
         """)
-        #transactions = [()]
-        #cursor.executemany("INSERT INTO transactions (user_name, item_name, steal_time) VALUES (?, ?, ?)", transactions)
+
         conn.commit()
-        cursor.execute("SELECT * FROM transactions")
-        data = cursor.fetchall()
-        print (data)
         conn.close()
 
