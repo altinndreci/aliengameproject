@@ -16,3 +16,4 @@ Each player starts off with 100 points of blood, and has to choose weapons that 
 Each weapon varies in blood cost and effectiveness. The player has to balance their limited blood supply effectively or they risk death.
 
 Lastly, the GameManager class will help us manage our choices throughout the story with letting us steal and return items and tell us which item is available for use.
+  

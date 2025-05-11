@@ -32,14 +32,14 @@ def below_blood_level():
 #creating main CLI
 while True:
     print("Main Menu")
-    print("1. Show Stealing Inventory")
+    print("1. Show Current Inventory")
     print("2. Steal Item")
     print("3. Show Stealable Items")
     print("4. Return an Item")
-    print("5. Exit")
+    print("5. Travel")
     print("6. View Transaction History")
     print("7. Show Map")
-    print("8. Travel\n")
+    print("8. Exit\n")
 
 
 
@@ -47,7 +47,7 @@ while True:
     choice = input("Choose an option: ")
     
     if choice == '1':
-        print("Stealing Inventory:")
+        print("Current Inventory:")
         print(player.Inventory.items)
     
     elif choice == '2':
@@ -152,7 +152,7 @@ while True:
             print("Please enter a correct input.")
 
     #ends the game
-    elif choice == '5':
+    elif choice == '8':
         print("Exiting the game. Goodbye!")
         break
     
@@ -187,9 +187,8 @@ while True:
         story.draw_map()
         story.show_map()
 
-    elif choice == '8':
-        dest = input("Enter the location you want to travel to: ")
-        story.travel(dest)
+    elif choice == '5':
+        story.travel()
 
     else:
         print("Wrong move buddy. Try again.")

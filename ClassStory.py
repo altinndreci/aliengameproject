@@ -71,7 +71,39 @@ class Story:
             print("- Final Chamber (Unlocked)")
 
     #function allowing you to travel around the spaceship
-    def travel(self, destination):
+    def travel(self, destination=None):
+        #Always show available destinations first
+        print("\nAvailable destinations:")
+        available_destinations = list(self.game_map.get(self.current_location, {}).keys())
+        
+        #Add Final Chamber option if conditions are met
+        if (self.current_location == "Alien Recovery Chamber" and 
+            all(chamber not in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"])):
+            available_destinations.append("Final Chamber")
+
+        if not available_destinations:
+            print("There are no available destinations from your current location.")
+            return
+
+        #Display numbered menu of destinations
+        for i, dest in enumerate(available_destinations, 1):
+            print(f"{i}. {dest}")
+
+        #Get user choice
+        while True:
+            try:
+                choice = input("\nEnter the number of your destination: ")
+                choice_num = int(choice)
+                
+                if 1 <= choice_num <= len(available_destinations):
+                    destination = available_destinations[choice_num - 1]
+                    break
+                else:
+                    print(f"Please enter a number between 1 and {len(available_destinations)}")
+            except ValueError:
+                print("Please enter a valid number")
+
+        #Handle Final Chamber access
         if destination == "Final Chamber":
             if self.current_location != "Alien Recovery Chamber":
                 print("You must pass through the Recovery Chamber to access the Final Chamber.")
@@ -87,7 +119,7 @@ class Story:
             print(f"\nYou move to: {destination}")
             self.trigger_encounter()
         else:
-            print("You can’t get there from here.")
+            print("You can't get there from here.")
 
     #map locations connected to the map using a dictionary
     def draw_map(self):
@@ -125,6 +157,7 @@ class Story:
             print(f"\nYou encounter {monster['name']}!")
             print(monster['description'])
 
+            #Initialize player health at the start of combat
             player_hp = 100
 
             #combat loop until player or alien monster is defeated
@@ -140,11 +173,15 @@ class Story:
                 if action == "1":
                     if not self.user.Inventory.items:
                         print("You have no items to defend yourself! The alien attacks!")
-                        self.user.blood -= 20
+                        player_hp -= 20
                         self.user.consequence += 1
-                        print(f"You lost 20 blood. Blood remaining: {self.user.blood}")
-                        return
-
+                        print(f"You lost 20 hp. Remaining HP: {player_hp}/100")
+                        if player_hp <= 0:
+                            print("You were knocked out in battle!")
+                            print("Game Over, you ran out of Health.")
+                            exit()
+                        continue
+                    
                     print("\nChoose an item to use:")
                     for i, item in enumerate(self.user.Inventory.items.keys(), 1):
                         print(f"{i}. {item}")
@@ -189,9 +226,7 @@ class Story:
                             return
 
                         #game ends when player health is 0 
-                        player_hp -= 20
                         if player_hp <= 0:
-                            print(f"{monster['name']} attacks! You lost 20 health points. Remaining HP: {player_hp}/100")
                             print("You were knocked out in battle!")
                             print("GAME OVER, you ran out of Health.")
                             exit()
