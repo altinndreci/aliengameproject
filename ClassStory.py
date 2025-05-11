@@ -116,9 +116,18 @@ class Story:
             print("\nYou move to: Final Chamber")
             self.trigger_encounter()
         elif destination in self.game_map.get(self.current_location, {}):
-            self.current_location = destination
-            print(f"\nYou move to: {destination}")
-            self.trigger_encounter()
+                self.current_location = destination
+                print(f"\nYou move to: {destination}")
+
+        #recover HP if in Recovery Chamber
+                if destination == "Recovery Chamber":
+                    if self.player_hp < 100:
+                        self.player_hp = 100
+                        print("You rest in the chamber and recover your health. HP fully restored to 100!")
+                    else:
+                        print("You are already at full health. You take a quick breather anyway.")
+                self.trigger_encounter()
+        
         else:
             print("You can't get there from here.")
 
@@ -240,7 +249,7 @@ class Story:
                 elif action == "2":
                     if random.random() < 0.5:
                         print("You successfully escaped!")
-                        print("You retreat to the Main Hub to recover.")
+                        print("You retreated to the Main Hub.")
                         print("\n")
                         self.current_location = "Main Hub"
                         return
