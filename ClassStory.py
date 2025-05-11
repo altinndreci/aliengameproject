@@ -5,6 +5,7 @@ class Story:
     def __init__(self, user):
         self.user = user
         self.current_location = "Main Hub"
+        self.player_hp = 100
 
         #alien spaceship map layout
         self.game_map = {
@@ -157,13 +158,10 @@ class Story:
             print(f"\nYou encounter {monster['name']}!")
             print(monster['description'])
 
-            #Initialize player health at the start of combat
-            player_hp = 100
-
             #combat loop until player or alien monster is defeated
-            while monster["hp"] > 0 and player_hp > 0:
+            while monster["hp"] > 0 and self.player_hp > 0:
                 print("\nBattle Menu:")
-                print(f"Your HP: {player_hp}/100")
+                print(f"Your HP: {self.player_hp}/100")
                 print("1. Fight")
                 print("2. Run")
                 action = input("Choose an action: ")
@@ -173,10 +171,10 @@ class Story:
                 if action == "1":
                     if not self.user.Inventory.items:
                         print("You have no items to defend yourself! The alien attacks!")
-                        player_hp -= 20
+                        self.player_hp -= 20
                         self.user.consequence += 1
-                        print(f"You lost 20 hp. Remaining HP: {player_hp}/100")
-                        if player_hp <= 0:
+                        print(f"You lost 20 hp. Remaining HP: {self.player_hp}/100")
+                        if self.player_hp <= 0:
                             print("You were knocked out in battle!")
                             print("Game Over, you ran out of Health.")
                             exit()
@@ -214,9 +212,9 @@ class Story:
 
                         #if monster is still alive, it attacks back
                         if monster["hp"] > 0:
-                            player_hp -= 20
-                            print(f"{monster['name']} attacks! You lost 20 health points. Remaining HP: {player_hp}/100")
-                            if player_hp <= 0:
+                            self.player_hp -= 20
+                            print(f"{monster['name']} attacks! You lost 20 health points. Remaining HP: {self.player_hp}/100")
+                            if self.player_hp <= 0:
                                 print("You were knocked out in battle!")
                                 print("Game Over, you ran out of Health.")
                                 exit()
@@ -226,7 +224,7 @@ class Story:
                             return
 
                         #game ends when player health is 0 
-                        if player_hp <= 0:
+                        if self.player_hp <= 0:
                             print("You were knocked out in battle!")
                             print("GAME OVER, you ran out of Health.")
                             exit()
@@ -234,9 +232,9 @@ class Story:
                     #wrong move gets you killed too
                     except (ValueError, IndexError):
                         print("You fumbled and took damage while panicking!")
-                        player_hp -= 20
-                        if player_hp <= 0:
-                            print(f"You lost 20 health. Remaining HP: {player_hp}/100")
+                        self.player_hp -= 20
+                        if self.player_hp <= 0:
+                            print(f"You lost 20 health. Remaining HP: {self.player_hp}/100")
                             print("You were knocked out in battle!")
                             print("Game Over, you ran out of Health.")
                             exit(0)
@@ -251,11 +249,11 @@ class Story:
                         return
                     else:
                         print(f"You tried to run, but {monster['name']} blocked your path and struck you!")
-                        player_hp -= 20
-                        if player_hp <= 0:
+                        self.player_hp -= 20
+                        if self.player_hp <= 0:
                             print("You were knocked out while trying to flee!")
                             print("Game Over, you ran out of Health.")
                             return
-                        print(f"You lost 20 health. Remaining HP: {player_hp}/100")
+                        print(f"You lost 20 health. Remaining HP: {self.player_hp}/100")
                 else:
                     print("Invalid choice. Try again.")
