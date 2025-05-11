@@ -37,9 +37,9 @@ while True:
     print("3. Stealable Items")
     print("4. Return an Item")
     print("5. Travel")
-    print("6. View Transaction History")
-    print("7. Map")
-    print("8. HP/Blood Levels")
+    print("6. Map")
+    print("7. HP/Blood Levels")
+    print("8. View Transaction History")
     print("9. Exit\n")
 
 
@@ -158,7 +158,7 @@ while True:
         break
     
     
-    elif choice == '6':
+    elif choice == '8':
         print("Transaction History:\n")
     
         conn = sqlite3.connect("alien_game.db")
@@ -184,14 +184,14 @@ while True:
 
         conn.close()
 
-    elif choice == '7':
+    elif choice == '6':
         story.draw_map()
         story.show_map()
 
     elif choice == '5':
         story.travel()
 
-    elif choice == '8':
+    elif choice == '7':
         print(f"Blood: {player.blood}/100")
         print(f"HP: {story.player_hp}/100\n")
 

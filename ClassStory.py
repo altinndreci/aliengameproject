@@ -215,6 +215,8 @@ class Story:
                                 exit()
                         else:
                             print(f"\n{monster['name']} has been defeated!")
+                            print(f'Remaining player HP: {self.player_hp}/100')
+                            print(f'The {self.current_location} is now empty...\nThe next battle still awaits!\n')
                             del self.monsters[self.current_location]
                             return
 
