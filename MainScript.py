@@ -55,6 +55,7 @@ while True:
         for i in range(len(stealable_items)):
             item = stealable_items[i]
             print(f"{i + 1}. {item[0]} (Blood Cost: {item[1]})")
+        print("\n")
 
         selected_item = input("Enter item number: ")
         try:
@@ -80,9 +81,9 @@ while True:
                     if below_blood_level():
                         break  
                 else:
-                    print("Can't steal item due to blood level.")
-                    if below_blood_level():
-                        break  
+                    print("Game Over, you ran out of blood. You didn't manage your blood properly.")
+                    break
+  
             else: 
                 print("Invalid choice. Choose a number from the list.")
         except ValueError:
@@ -125,10 +126,16 @@ while True:
 
                 player.Inventory.remove_item(item_name)
 
+                # Refund blood
+                player.blood += item_blood_cost
+
+                # Add back to stealable items
                 stealable_items.append((item_name, item_blood_cost))
 
                 print(f"You successfully returned: {item_name}")
+                print(f"You regained {item_blood_cost} blood. Blood now: {player.blood}")
                 print("\n")
+
 
                 #logs the item returning transaction
                 conn = sqlite3.connect("alien_game.db")
@@ -149,7 +156,7 @@ while True:
         print("Exiting the game. Goodbye!")
         break
     
-
+    
     elif choice == '6':
         print("Transaction History:\n")
     
