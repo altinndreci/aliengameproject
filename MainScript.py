@@ -32,14 +32,15 @@ def below_blood_level():
 #creating main CLI
 while True:
     print("Main Menu")
-    print("1. Show Current Inventory")
+    print("1. Current Inventory")
     print("2. Steal Item")
-    print("3. Show Stealable Items")
+    print("3. Stealable Items")
     print("4. Return an Item")
     print("5. Travel")
     print("6. View Transaction History")
-    print("7. Show Map")
-    print("8. Exit\n")
+    print("7. Map")
+    print("8. HP/Blood Levels")
+    print("9. Exit\n")
 
 
 
@@ -152,7 +153,7 @@ while True:
             print("Please enter a correct input.")
 
     #ends the game
-    elif choice == '8':
+    elif choice == '9':
         print("Exiting the game. Goodbye!")
         break
     
@@ -189,6 +190,10 @@ while True:
 
     elif choice == '5':
         story.travel()
+
+    elif choice == '8':
+        print(f"Blood: {player.blood}/100")
+        print(f"HP: {story.player_hp}/100\n")
 
     else:
         print("Wrong move buddy. Try again.")

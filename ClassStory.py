@@ -133,11 +133,6 @@ class Story:
             "Final Chamber": "       [Final Chamber]"
         }
 
-        #marks your current location with *
-        for key in location_symbols:
-            if key == self.current_location:
-                location_symbols[key] = "*" + location_symbols[key] + "*"
-
         #prints the map of the spaceship using key characters
         print("\nAlien Mothership Map:")
         print("         " + location_symbols["Red Chamber"])
