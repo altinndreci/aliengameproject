@@ -67,6 +67,7 @@ while True:
                 #adds item to inventory 
                 if player.Inventory.add_item(item[0], item[1]):
                     print(f"You stole: {item[0]} (Blood Cost: {item[1]})")
+                    stealable_items.pop(numbered_item)
                     print('\n')
 
                     #logs a transaction for stealing
