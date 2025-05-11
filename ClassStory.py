@@ -6,6 +6,7 @@ class Story:
         self.user = user
         self.current_location = "Main Hub"
         self.player_hp = 100
+        player_name=self.user.get_name()
 
         #alien spaceship map layout
         self.game_map = {
@@ -15,7 +16,7 @@ class Story:
                 "Green Chamber": 3,
                 "Blue Chamber": 4
             },
-            "Alien Recovery Chamber": {"Main Hub": 1},
+            "Recovery Chamber": {"Main Hub": 1},
             "Red Chamber": {"Main Hub": 2},
             "Blue Chamber": {"Main Hub": 3},
             "Green Chamber": {"Main Hub": 4}
@@ -40,7 +41,7 @@ class Story:
                 "weakness": "Alien Gun",
                 "hp": 100
             },
-            "Final Chamber": {
+            "The Final Chamber": {
                 "name": "Darth Khan",
                 "description": "A towering figure in black armor stands at the center of the room. His lightsaber ignites as he speaks with chilling calm: 'Superior minds conquer all... with force.'",
                 "weakness": "Alien Snot",
@@ -66,10 +67,10 @@ class Story:
         print("\n")
 
         #unlockingthe final chamber where the final boss is after defeating the 3 aliens
-        if self.current_location == "Alien Recovery Chamber" and all(
+        if self.current_location == "Recovery Chamber" and all(
             chamber not in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"]
         ):
-            print("- Final Chamber (Unlocked)")
+            print("- The Final Chamber (Unlocked)")
 
     #function allowing you to travel around the spaceship
     def travel(self, destination=None):
@@ -78,9 +79,9 @@ class Story:
         available_destinations = list(self.game_map.get(self.current_location, {}).keys())
         
         #Add Final Chamber option if conditions are met
-        if (self.current_location == "Alien Recovery Chamber" and 
+        if (self.current_location == "Recovery Chamber" and 
             all(chamber not in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"])):
-            available_destinations.append("Final Chamber")
+            available_destinations.append("The Final Chamber")
 
         if not available_destinations:
             print("There are no available destinations from your current location.")
@@ -105,19 +106,19 @@ class Story:
                 print("Please enter a valid number")
 
         #Handle Final Chamber access
-        if destination == "Final Chamber":
-            if self.current_location != "Alien Recovery Chamber":
-                print("You must pass through the Recovery Chamber to access the Final Chamber.")
+        if destination == "The Final Chamber":
+            if self.current_location != "Recovery Chamber":
+                print("You must pass through the Recovery Chamber to access The Final Chamber.")
                 return
             if any(chamber in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"]):
                 print("You feel a strong force blocking the path. Defeat all other aliens first.")
                 return
-            self.current_location = "Final Chamber"
-            print("\nYou move to: Final Chamber")
+            self.current_location = "The Final Chamber"
+            print("\nYou have entered: The Final Chamber")
             self.trigger_encounter()
         elif destination in self.game_map.get(self.current_location, {}):
                 self.current_location = destination
-                print(f"\nYou move to: {destination}")
+                print(f"\nYou have entered: {destination}")
 
         #recover HP if in Recovery Chamber
                 if destination == "Recovery Chamber":
@@ -135,11 +136,11 @@ class Story:
     def draw_map(self):
         location_symbols = {
             "Main Hub": "[Main Hub]",
-            "Alien Recovery Chamber": "       [Recovery Chamber]",
+            "Recovery Chamber": "       [Recovery Chamber]",
             "Red Chamber": "        [Red Chamber]",
             "Green Chamber": "[Green Chamber]",
             "Blue Chamber": "[Blue Chamber]",
-            "Final Chamber": "       [Final Chamber]"
+            "The Final Chamber": "       [The Final Chamber]"
         }
 
         #prints the map of the spaceship using key characters
@@ -148,11 +149,11 @@ class Story:
         print("                       |")
         print(location_symbols["Green Chamber"] + " - " + location_symbols["Main Hub"] + " - " + location_symbols["Blue Chamber"])
         print("                       |")
-        print("         " + location_symbols["Alien Recovery Chamber"])
+        print("         " + location_symbols["Recovery Chamber"])
 
         if all(chamber not in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"]):
             print("                       |")
-            print("         " + location_symbols["Final Chamber"])
+            print("         " + location_symbols["The Final Chamber"])
         print()
 
     #encounter function that has the combat mechanic
@@ -225,7 +226,7 @@ class Story:
                         else:
                             print(f"\n{monster['name']} has been defeated!")
                             print(f'Remaining player HP: {self.player_hp}/100')
-                            print(f'The {self.current_location} is now empty...\nThe next battle still awaits!\n')
+                            print(f'The {self.current_location} is now empty...\n{self.user.get_name()}:"Is it over yet?..."\n')
                             del self.monsters[self.current_location]
                             return
 
