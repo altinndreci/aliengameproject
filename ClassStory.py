@@ -121,6 +121,13 @@ class Story:
                 self.current_location = destination
                 print(f"\nYou have entered: {destination}")
 
+                #notifying player of the boss
+                if destination == "Main Hub" and all(
+                    chamber not in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"]):
+                    print("A distant *BOOM* echoes through the walls...")
+                    print("You turn your head. It came from the Recovery Chamber.")
+                    print("Something... or someone... has awakened.\n")
+
         #recover HP if in Recovery Chamber
                 if destination == "Recovery Chamber":
                     if self.player_hp < 100:

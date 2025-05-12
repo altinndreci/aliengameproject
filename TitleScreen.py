@@ -1,3 +1,4 @@
+#title screen, play or exit game
 def title_screen():
     print("\n" + "="*60)
     print("             XenoBlood: Attack on Aliens")
