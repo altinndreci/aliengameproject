@@ -1,4 +1,5 @@
 import sqlite3
+from TitleScreen import title_screen
 from ClassUser import User
 from ClassStory import Story
 from ClassInventory import Inventory
@@ -7,6 +8,7 @@ from ClassGameManager import GameManager
 from alien_database import MakeDatabase
 
 #creates user, starts the database and the story
+title_screen()
 player = User()
 MakeDatabase(player)
 story = Story(player)

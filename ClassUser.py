@@ -7,8 +7,8 @@ class User:
     #User class is made to work with the story class in where the player can input their name.
     #it also establishes the blood level and consequence system set to zero which will be used later on.
     def __init__(self, inventory=None):
-        self.name = input("What is your character's name?: ")
-        print("You're finally awake!")
+        self.name = input("\nWhat is your character's name?: ")
+        print("\nYou're finally awake!\n")
         print("Hello Prisoner,", self.name)
         self.blood = 100
         self.Inventory = Inventory(self)

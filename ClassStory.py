@@ -58,6 +58,7 @@ class Story:
             "You will have many items to steal and use them to your best ability, but discreetly, or else bad things will happen...\n"
             "\nYou're starting in the Main Hub of the alien mothership. From here, you can explore the chambers...\n"
         )
+
     #function teling you where you are and where you can go
     def show_map(self):
         print(f"\nYou are currently in: {self.current_location}")
@@ -66,7 +67,7 @@ class Story:
             print(f"- {destination}")
 
         #unlocking the final chamber where the final boss is after defeating the 3 aliens
-        if self.current_location == "Recovery Chamber" and all(
+        if self.current_location == "Main Hub" and all(
             chamber not in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"]
         ):
             print("- The Final Chamber (Unlocked)")
@@ -231,8 +232,16 @@ class Story:
 
                             #The Final Chamber has been passed then provide the victory & exit game, THE END.
                             if self.current_location == "The Final Chamber":
-                                print("You have defeated Darth Khan and aquired his head to take back, humanity is saved!")
-                                print("Thank you for playing! THE END.\n")
+                                print("\nAs Darth Khan collapses, his blade clatters to the ground, pulsing faintly with dying alien energy...")
+                                print(f"{self.user.get_name()} steps over the fallen tyrant, bloodied but unbroken.")
+                                print("You take a final breath as alarms blare across the mothership.")
+                                print("\n[!] THE CORE HAS BEEN DESTABILIZED")
+                                print("With seconds left, you sprint to the nearest escape pod.")
+                                print("As you blast away from the mothership, it erupts in a silent, cosmic fireball above Earth.")
+                                print("\nEarth is safe. For now...")
+                                print("\n                    XenoBlood: Attack on Aliens")
+                                print("                        Thank you for playing.")
+                                print("                            THE END.\n")
                                 exit(0)
                             return
 
