@@ -9,7 +9,6 @@ class User:
     def __init__(self, inventory=None):
         self.name = input("\nWhat is your character's name?: ")
         print("\nYou're finally awake!\n")
-        print("Hello Prisoner,", self.name)
         self.blood = 100
         self.Inventory = Inventory(self)
         self.consequence = 0

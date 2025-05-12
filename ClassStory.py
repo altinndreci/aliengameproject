@@ -51,12 +51,15 @@ class Story:
 
         #game intro
         self.intro = (
-            "\nYou are now in a world, where a species of Aliens are set on world domination and human imprisonment, have arrived on Earth.\n"
-            "It is up to one person to escape and save the world to lead the resistance and fight back.\n"
-            f"That person is {user.get_name()}.\n"
-            "You will be on an alien imprisonment camp located on the mothership hovering over Earth & each of your decisions will have consequences...\n"
-            "You will have many items to steal and use them to your best ability, but discreetly, or else bad things will happen...\n"
-            "\nYou're starting in the Main Hub of the alien mothership. From here, you can explore the chambers...\n"
+            "A dead silence hangs over Earth. An alien military has swept in,\n"
+            "herding the last of humanity into iron cells aboard a vast, sun‑eclipsing mothership.\n"
+            f"{user.get_name()}, you are the last hope to spark the final rebellion in a world drowning in dread.\n"
+            "Each corridor throbs with otherworldly whispers and the distant echo of tortured screams.\n"
+            "By day’s flicker, you’ll scavenge forbidden tools, beak alien locks with shaking hands.\n"
+            "One misstep summons a shriek that chills your blood—and then, oblivion.\n"
+            "\n"
+            "Make your way through the twisted chambers, breach the Final Chamber, and face the tyrant known only as Darth.\n"
+            "There is no retreat. One spark of courage, one act of defiance—everything rides on you.\n"
         )
 
     #function teling you where you are and where you can go

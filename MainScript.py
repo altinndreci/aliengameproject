@@ -197,6 +197,6 @@ while True:
     elif choice == '7':
         print(f"Blood: {player.blood}/100")
         print(f"HP: {story.player_hp}/100\n")
-
+ 
     else:
         print("Wrong move buddy. Try again.")
