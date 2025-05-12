@@ -64,14 +64,14 @@ class Story:
         print("You can go to:")
         for destination in self.game_map.get(self.current_location, {}):
             print(f"- {destination}")
-        print("\n")
 
-        #unlockingthe final chamber where the final boss is after defeating the 3 aliens
+        #unlocking the final chamber where the final boss is after defeating the 3 aliens
         if self.current_location == "Recovery Chamber" and all(
             chamber not in self.monsters for chamber in ["Red Chamber", "Green Chamber", "Blue Chamber"]
         ):
             print("- The Final Chamber (Unlocked)")
-
+        print()
+        
     #function allowing you to travel around the spaceship
     def travel(self, destination=None):
         #Always show available destinations first
@@ -228,6 +228,12 @@ class Story:
                             print(f'Remaining player HP: {self.player_hp}/100')
                             print(f'The {self.current_location} is now empty...\n{self.user.get_name()}:"Is it over yet?..."\n')
                             del self.monsters[self.current_location]
+
+                            #The Final Chamber has been passed then provide the victory & exit game, THE END.
+                            if self.current_location == "The Final Chamber":
+                                print("You have defeated Darth Khan and aquired his head to take back, humanity is saved!")
+                                print("Thank you for playing! THE END.\n")
+                                exit(0)
                             return
 
                         #game ends when player health is 0 
