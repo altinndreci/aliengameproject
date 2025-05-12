@@ -1,6 +1,6 @@
 Game Development Team: Jesua Gonzalez, Altin Ndreci, Tenzin Phuntsok and Michael Pierre
 
-Alien Game is an action game that has our protagonist stuck on an Alien Mothership as a prisoner. He has to move up the rankings to take over the Alien Mothership but will have to use the weapons of Aliens to move across and win against the extraterrestials. The catch is that each weapon will decrease our blood levels due to the toxicity of them. Use each weapon wisely and return when needed, or else... 
+XenoBlood: Attack on Aliens is an action game that has our protagonist stuck on an Alien Mothership as a prisoner. He has to move up the rankings to take over the Alien Mothership but will have to use the weapons of Aliens to move across and win against the extraterrestials. The catch is that each weapon will decrease our blood levels due to the toxicity of them. Use each weapon wisely and return when needed, or else... 
 
 GAME OVER!
 
